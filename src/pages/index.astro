@@ -389,7 +389,7 @@ const designs: Design[] = [
                       </p>
                     </div>
                     <div>
-                      <span class="px-3 py-1 bg-slate-100 text-slate-500 font-mono text-xs rounded-lg border border-slate-200/40 shadow-3xs">
+                      <span class="px-3 py-1 bg-slate-50 text-slate-600 font-mono text-xs rounded-lg border border-slate-200/60 shadow-3xs">
                         {exp.period}
                       </span>
                     </div>
@@ -442,7 +442,7 @@ const designs: Design[] = [
                       </p>
                     </div>
                     <div>
-                      <span class="px-3 py-1 bg-slate-100 text-slate-500 font-mono text-xs rounded-lg border border-slate-200/40 shadow-3xs">
+                      <span class="px-3 py-1 bg-slate-50 text-slate-600 font-mono text-xs rounded-lg border border-slate-200/60 shadow-3xs">
                         {edu.period}
                       </span>
                     </div>
@@ -552,7 +552,7 @@ const designs: Design[] = [
 
                 <div class="flex flex-wrap gap-1 pt-1">
                   {project.tags.map((tag) => (
-                    <span class="px-2 py-0.5 bg-slate-50 text-slate-500 text-[10px] font-mono rounded-md border border-slate-200/40">
+                    <span class="px-2 py-0.5 bg-slate-50 text-slate-500 text-[10px] font-mono rounded-md border border-slate-200/60">
                       {tag}
                     </span>
                   ))}
@@ -671,13 +671,29 @@ const designs: Design[] = [
           <div class="w-full max-w-xs">
             <a
               href="mailto:valezka.lopez528@gmail.com"
-              class="flex items-center justify-between w-full px-4 py-3 bg-white border border-slate-200 hover:border-rose-200 rounded-xl text-xs font-mono text-slate-600 hover:text-rose-500 transition-all shadow-2xs group"
+              class="flex items-center justify-center gap-2 w-full px-4 py-3 bg-white border border-slate-200 hover:border-rose-200 rounded-xl text-xs font-mono text-slate-600 hover:text-rose-500 transition-all shadow-2xs group"
             >
-              <span class="truncate pr-2 pl-1">valezka.lopez528@gmail.com</span>
-              <span
-                class="text-rose-400 group-hover:translate-x-0.5 transition-transform shrink-0"
-                >&rarr;</span
+              <svg
+                class="w-4 h-4 text-rose-400 shrink-0"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
               >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0l-7.5-4.615a2.25 2.25 0 01-1.07-1.916V6.75"
+                ></path>
+              </svg>
+
+              <span class="truncate">valezka.lopez528@gmail.com</span>
+
+              <span
+                class="text-rose-400 group-hover:translate-x-0.5 transition-transform shrink-0 ml-1"
+              >
+                &rarr;
+              </span>
             </a>
           </div>
         </div>
