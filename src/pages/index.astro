@@ -47,7 +47,7 @@ const projects: Project[] = [
     tags: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Supabase"],
     imageSrc: "/projects/universe-of-books.png",
     aspectRatio: "aspect-video",
-    link: "https://universe-of-books.pages.dev/",
+    link: "https://universe-of-books.vercel.app/",
   },
   {
     title: "Whisper Generator",
@@ -127,6 +127,12 @@ const designs: Design[] = [
     category: "Header",
     aspectRatio: "aspect-video",
     imageSrc: "/designs/sweet-bubble-gum.png",
+  },
+  {
+    title: "I'm that Attitude",
+    category: "Header",
+    aspectRatio: "aspect-video",
+    imageSrc: "/designs/im-that-attitude.png",
   },
 ];
 ---
@@ -618,7 +624,11 @@ const designs: Design[] = [
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {
           designs.map((design) => (
-            <div class="group bg-white border border-slate-200/60 p-3 rounded-2xl hover:border-rose-200 hover:shadow-xs transition-all space-y-3 dark:bg-[#1a1917] dark:border-neutral-800/60 dark:hover:border-rose-900/60">
+            <div
+              data-lightbox={design.imageSrc}
+              data-title={design.title}
+              class="group bg-white border border-slate-200/60 p-3 rounded-2xl hover:border-rose-200 hover:shadow-xs transition-all space-y-3 cursor-pointer dark:bg-[#1a1917] dark:border-neutral-800/60 dark:hover:border-rose-900/60"
+            >
               <div
                 class={`w-full ${design.aspectRatio} rounded-xl bg-slate-100 relative overflow-hidden flex items-center justify-center border border-slate-100 shadow-inner dark:border-zinc-800`}
               >
@@ -647,6 +657,47 @@ const designs: Design[] = [
             </div>
           ))
         }
+      </div>
+
+      <div
+        id="lightbox-modal"
+        class="fixed inset-0 z-100 bg-[#faf8f5]/95 dark:bg-[#121110]/95 backdrop-blur-md flex flex-col items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300"
+      >
+        <button
+          id="lightbox-close"
+          class="absolute top-6 right-6 p-2 text-slate-500 hover:text-rose-500 dark:text-slate-400 dark:hover:text-rose-400 transition-colors cursor-pointer focus:outline-none"
+          aria-label="Close modal"
+        >
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+
+        <div
+          class="max-w-3xl max-h-[75vh] w-full flex items-center justify-center relative"
+        >
+          <img
+            id="lightbox-img"
+            src=""
+            alt=""
+            class="max-w-full max-h-[75vh] rounded-2xl shadow-xl border border-slate-200/40 dark:border-neutral-800/60 object-contain transform scale-95 transition-transform duration-300"
+          />
+        </div>
+
+        <h4
+          id="lightbox-caption"
+          class="mt-4 text-sm font-bold font-mono tracking-wide text-slate-700 dark:text-slate-300"
+        >
+        </h4>
       </div>
     </section>
 
@@ -757,6 +808,54 @@ const designs: Design[] = [
     } else {
       document.documentElement.classList.add("dark");
       localStorage.setItem("theme", "dark");
+    }
+  });
+
+  const lightboxItems = document.querySelectorAll("[data-lightbox]");
+  const modal = document.getElementById("lightbox-modal");
+  const modalImg = document.getElementById("lightbox-img") as HTMLImageElement;
+  const modalCaption = document.getElementById("lightbox-caption");
+  const closeBtn = document.getElementById("lightbox-close");
+
+  lightboxItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      const imgSrc = item.getAttribute("data-lightbox");
+      const imgTitle = item.getAttribute("data-title");
+
+      if (modal && modalImg && modalCaption && imgSrc) {
+        modalImg.src = imgSrc;
+        modalImg.alt = imgTitle || "";
+        modalCaption.textContent = imgTitle || "";
+
+        modal.classList.remove("opacity-0", "pointer-events-none");
+        setTimeout(() => {
+          modalImg.classList.remove("scale-95");
+        }, 50);
+
+        document.body.style.overflow = "hidden";
+      }
+    });
+  });
+
+  const closeModal = () => {
+    if (modal && modalImg) {
+      modal.classList.add("opacity-0", "pointer-events-none");
+      modalImg.classList.add("scale-95");
+      document.body.style.overflow = "";
+    }
+  };
+
+  closeBtn?.addEventListener("click", closeModal);
+
+  modal?.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      closeModal();
     }
   });
 </script>
